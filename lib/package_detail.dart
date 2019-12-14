@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:stretch/main.dart';
+import 'package:stretch/play.dart';
 
 class PackageDetailPage extends StatefulWidget {
   PackageDetailPage(this.title,this.id,{Key key}):super(key:key);
@@ -91,33 +92,6 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
         },
         itemCount: packages.documents.length,
         scrollDirection: Axis.vertical);
-//    return FutureBuilder<QuerySnapshot>(
-//      future: Firestore.instance.collection("package").document(widget.id).collection("activities").getDocuments(),
-//      builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-//        if(snapshot.connectionState == ConnectionState.done){
-//          if(!snapshot.hasData){
-//            return Container(child: Text('error...'),);
-//          }
-//          return ListView.separated(
-//              itemBuilder: (context, index){
-//                return ListTile(
-//                  leading: buildImage(snapshot.data.documents[index].data["activity"]),
-//                  title: Text(snapshot.data.documents[index].data["activity"]),
-//                  trailing:Icon(Icons.keyboard_arrow_right),
-//                );
-//
-//              },
-//              separatorBuilder: (context,index){
-//                return Divider(color: Colors.blueGrey);
-//              },
-//              itemCount: snapshot.data.documents.length,
-//              scrollDirection: Axis.vertical);
-//        }else{
-//          return Container(child: Text('Loading...'),);
-//        }
-//
-//      },
-//    );
   }
 
   Widget buildVideo() {
@@ -143,55 +117,9 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
             )),
         controller: SwiperController(),
         scrollDirection: Axis.horizontal);
-//    return FutureBuilder<QuerySnapshot>(
-//      future: Firestore.instance.collection("package").document(widget.id).collection("activities").getDocuments(),
-//      builder:  (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-//        if(snapshot.connectionState == ConnectionState.done){
-//          if(!snapshot.hasData){
-//            return Container(child: Text('error...'),);
-//          }
-//          return Container(
-//            height: 300,
-//            child: Swiper(
-//                itemBuilder: (context, index) {
-//                  return buildImage(snapshot.data.documents[index].data["activity"]);
-//                },
-//                autoplayDelay: 5000,
-//                autoplay: true,
-//                autoplayDisableOnInteraction: false,
-////            loop: true,
-//                itemCount: snapshot.data.documents.length,
-//                index: 0,
-//                duration: 1000,
-//                pagination: SwiperPagination(
-//                    builder: DotSwiperPaginationBuilder(
-//                      color: Colors.white,
-//                      activeColor: const Color(0XFF00CC66),
-//                    )),
-//                controller: SwiperController(),
-//                scrollDirection: Axis.horizontal),
-//          );
-//          return ListView.separated(
-//              itemBuilder: (context, index){
-//                return ListTile(
-//                  leading: buildImage(snapshot.data.documents[index].data["activity"]),
-//                  title: Text(snapshot.data.documents[index].data["activity"]),
-//                  trailing:Icon(Icons.keyboard_arrow_right),
-//                );
-//
-//              },
-//              separatorBuilder: (context,index){
-//                return Divider(color: Colors.blueGrey);
-//              },
-//              itemCount: snapshot.data.documents.length,
-//              scrollDirection: Axis.vertical);
-//        }else{
-//          return Container(child: Text('Loading...'),);
-//        }
-//
-//      },
-//    );
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,12 +130,12 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
         backgroundColor: const Color(0XFFEEEEEE),
         body: Column(
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                child: buildVideo()
-              ),
-            ),
+//            Expanded(
+//              flex: 1,
+//              child: Container(
+//                child: buildVideo()
+//              ),
+//            ),
             Expanded(
               flex: 1,
               child: Container(
@@ -215,7 +143,14 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
               ),
             ),
           ],
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push( MaterialPageRoute(builder: (context) => PlayPage(widget.id)),);
+        },
+        child: Icon(Icons.play_arrow),
+        backgroundColor: Colors.blue,
+      ),
     );
   }
 }

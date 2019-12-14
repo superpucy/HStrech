@@ -30,6 +30,7 @@ dependencies:
   cached_network_image: ^1.1.1
   sensors: any
   signalr_client: any
+  carousel_slider: any
 #  webview_flutter: any
 
 dev_dependencies:

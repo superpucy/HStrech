@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 //import 'package:stretch/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sensors/sensors.dart';
-
+import 'package:signalr_client/signalr_client.dart';
 class DemoPage extends StatefulWidget {
   @override
   _DemoPageState createState() => _DemoPageState();
 }
+
+
 
 class _DemoPageState extends State<DemoPage> {
 
@@ -22,25 +24,56 @@ class _DemoPageState extends State<DemoPage> {
   <StreamSubscription<dynamic>>[];
 
 
+  static String serverUrl = "https://signalrservices.azurewebsites.net/messageHub";
+  final hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
+
+  Future signalr(double x,double y,double z) async {
+    print("==============");
+
+
+    hubConnection.on("ReceiveMessage", _handle);
+    try {
+      final result =
+      await hubConnection.invoke("SendMessage", args: ["dora", y.toString()]);
+      print(result);
+    } finally {
+
+    }
+  }
+  void _handle(List<Object> obj) {
+    print(obj);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    hubConnection.off("ServerInvokeMethodNoParametersNoReturnValue",
+        method: _handle);
+    super.dispose();
+  }
+
   @override
   void initState() {
-    _streamSubscriptions
-        .add(accelerometerEvents.listen((AccelerometerEvent event) {
-      setState(() {
-        _accelerometerValues = <double>[event.x, event.y, event.z];
-      });
-    }));
-    _streamSubscriptions.add(gyroscopeEvents.listen((GyroscopeEvent event) {
-      setState(() {
-        _gyroscopeValues = <double>[event.x, event.y, event.z];
-      });
-    }));
-    _streamSubscriptions
-        .add(userAccelerometerEvents.listen((UserAccelerometerEvent event) {
-      setState(() {
-        _userAccelerometerValues = <double>[event.x, event.y, event.z];
-      });
-    }));
+    hubConnection.start().then((_){
+      _streamSubscriptions
+          .add(accelerometerEvents.listen((AccelerometerEvent event) {
+        setState(() {
+          _accelerometerValues = <double>[event.x, event.y, event.z];
+          signalr(event.x,event.y,event.z);
+        });
+      }));
+      _streamSubscriptions.add(gyroscopeEvents.listen((GyroscopeEvent event) {
+        setState(() {
+          _gyroscopeValues = <double>[event.x, event.y, event.z];
+        });
+      }));
+      _streamSubscriptions
+          .add(userAccelerometerEvents.listen((UserAccelerometerEvent event) {
+        setState(() {
+          _userAccelerometerValues = <double>[event.x, event.y, event.z];
+        });
+      }));
+    });
+
 
   }
 
