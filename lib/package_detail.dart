@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 //import 'package:stretch/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:stretch/database.dart';
 import 'package:stretch/main.dart';
 import 'package:stretch/play.dart';
 
@@ -61,7 +62,7 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
           if(snapshot.hasData) {
             print(id);
             print(snapshot.data["pic"].toString());
-            return Image.asset('assets/activities/${snapshot.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,);
+            return Image.network('${snapshot.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,);
           }else{
             return Image.asset('assets/activities/001.png', width: 80,fit: BoxFit.fitWidth);
           }
@@ -80,7 +81,7 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
         itemBuilder: (context, index){
           var activity = activitys[packages.documents[index].data["activity"]];
           return ListTile(
-            leading: Image.asset('assets/activities/${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,),
+            leading: Image.network('${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,),
             title: Text(activity.data["desc"].toString()),
             subtitle: Text("${packages.documents[index].data["seconds"]}秒，重複${packages.documents[index].data["times"]}次"),
             trailing:Icon(Icons.keyboard_arrow_right),
@@ -101,7 +102,7 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
     return Swiper(
         itemBuilder: (context, index) {
           var activity = activitys[packages.documents[index].data["activity"]];
-          return Image.asset('assets/activities/${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,);
+          return Image.network('${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,);
         },
 //        autoplayDelay: 5000,
 //        autoplay: true,
@@ -145,12 +146,24 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
           ],
         ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async{
+          await addLog();
           Navigator.of(context).push( MaterialPageRoute(builder: (context) => PlayPage(widget.id)),);
         },
         child: Icon(Icons.play_arrow),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color(0XFF6EC16E),
       ),
     );
+  }
+
+  addLog() async {
+    final db = await DBProvider.db.database;
+    var res = await db.rawQuery('SELECT * FROM log');
+    if(res.isEmpty) {
+      DateTime dateTime = DateTime.now();
+      String d = "${dateTime.year}/${dateTime.month}/${dateTime.day}";
+      await db.rawInsert(
+          "INSERT Into log (date) values(?)", [d]);
+    }
   }
 }

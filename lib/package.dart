@@ -51,7 +51,7 @@ class _PackagePageState extends State<PackagePage> {
               itemBuilder: (context, index){
                 var pic = snapshot.data.documents[index].data["pic"].toString();
                 return ListTile(
-                  leading: Image.asset('assets/${pic}'),
+                  leading: Image.network('${pic}'),
 //                  isThreeLine: true,
                   title: Text(snapshot.data.documents[index].data["name"]),
                   subtitle: Text("時間：${snapshot.data.documents[index].data["seconds"]}".toString()),

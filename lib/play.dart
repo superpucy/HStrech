@@ -47,29 +47,65 @@ class _PlayPageState extends State<PlayPage> {
       }
     });
   }
+
+  Widget _buildBody(){
+    if(!loaded){
+      return Container(
+        color: Colors.white,
+        child: Text('Loading...'),
+      );
+    }
+    return Column(
+      children: <Widget>[
+        Container(
+            color: Colors.white,
+            child: CarouselSlider(
+              height: 400.0,
+              autoPlay: false,
+              enlargeCenterPage: true,
+              enableInfiniteScroll:false,
+              aspectRatio: 2.0,
+              items: packages.documents.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    var activity = activitys[i.data["activity"]];
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Image.network('${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,)
+                    );
+                  },
+                );
+              }).toList(),
+            )
+        ),
+//        Center(
+//            child: Text("1",style: TextStyle(fontSize: 30),),
+//        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(icon: Icon(Icons.skip_previous),onPressed: (){},),
+              IconButton(icon: Icon(Icons.play_arrow),onPressed: (){},),
+              IconButton(icon: Icon(Icons.skip_next),onPressed: (){},)
+            ],
+          )
+        ),
+
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
-    if(!loaded){
-      return Container(child: Text('Loading...'),);
-    }
-    return CarouselSlider(
-      height: 400.0,
-      autoPlay: false,
-      enlargeCenterPage: true,
-      enableInfiniteScroll:false,
-      aspectRatio: 2.0,
-      items: packages.documents.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            var activity = activitys[i.data["activity"]];
-            return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                child: Image.asset('assets/activities/${activity.data["pic"].toString()}', width: 80,fit: BoxFit.fitWidth,)
-            );
-          },
-        );
-      }).toList(),
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("伸展吧"),
+          centerTitle: true,
+          textTheme: Theme.of(context).appBarTheme.textTheme),
+      body: _buildBody()
     );
   }
 }

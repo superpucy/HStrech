@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
           iconTheme: IconThemeData(
             color: const Color(0XFFFFFFFF),
           ),
-          color: const Color(0XFFA3A3A3A3),
+          color: const Color(0XFF6EC16E),
 
           textTheme: TextTheme(
             title: TextStyle(

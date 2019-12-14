@@ -29,7 +29,7 @@ class _PartDetailPageState extends State<PartDetailPage> {
             itemBuilder: (context, index){
             return GestureDetector(
               child: Card(
-                child: Image.asset('assets/activities/${snapshot.data.documents[index].data["pic"]}',fit: BoxFit.cover,),
+                child: Image.network('${snapshot.data.documents[index].data["pic"]}',fit: BoxFit.cover,),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
