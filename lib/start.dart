@@ -10,12 +10,10 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Center(
-            child: getStart(),
-          ),
-        ],
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: getStart()
       ),
     );
   }
@@ -43,11 +41,12 @@ class _StartPageState extends State<StartPage> {
               textAlign: TextAlign.center,
               controller: nameController,
             ),
-          Image(
+          Expanded(
+            child: Image(
               image: AssetImage('assets/landing.png'),
-              width: double.infinity,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
             ),
+          ),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: RaisedButton(
