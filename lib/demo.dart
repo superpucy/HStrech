@@ -49,6 +49,9 @@ class _DemoPageState extends State<DemoPage> {
     hubConnection.off("ServerInvokeMethodNoParametersNoReturnValue",
         method: _handle);
     super.dispose();
+    for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
   }
 
   @override
@@ -87,41 +90,85 @@ class _DemoPageState extends State<DemoPage> {
         ?.map((double v) => v.toStringAsFixed(1))
         ?.toList();
 
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
 
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-
-        Padding(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('Accelerometer: $accelerometer'),
-            ],
+          Padding(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Accelerometer: $accelerometer'),
+              ],
+            ),
+            padding: const EdgeInsets.all(16.0),
           ),
-          padding: const EdgeInsets.all(16.0),
-        ),
-        Padding(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('UserAccelerometer: $userAccelerometer'),
-            ],
+          Padding(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('UserAccelerometer: $userAccelerometer'),
+              ],
+            ),
+            padding: const EdgeInsets.all(16.0),
           ),
-          padding: const EdgeInsets.all(16.0),
-        ),
-        Padding(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('Gyroscope: $gyroscope'),
-            ],
+          Padding(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Gyroscope: $gyroscope'),
+              ],
+            ),
+            padding: const EdgeInsets.all(16.0),
           ),
-          padding: const EdgeInsets.all(16.0),
-        ),
-      ],
+          RaisedButton(
+            onPressed: (){
+              Navigator.of(context).pop();
+            },
+            child: Text("結束"),
+          )
+        ],
+      )
     );
+
+//    return Column(
+//      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//      children: <Widget>[
+//
+//        Padding(
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//            children: <Widget>[
+//              Text('Accelerometer: $accelerometer'),
+//            ],
+//          ),
+//          padding: const EdgeInsets.all(16.0),
+//        ),
+//        Padding(
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//            children: <Widget>[
+//              Text('UserAccelerometer: $userAccelerometer'),
+//            ],
+//          ),
+//          padding: const EdgeInsets.all(16.0),
+//        ),
+//        Padding(
+//          child: Row(
+//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//            children: <Widget>[
+//              Text('Gyroscope: $gyroscope'),
+//            ],
+//          ),
+//          padding: const EdgeInsets.all(16.0),
+//        ),
+//        RaisedButton(
+//          child: Text("結束"),
+//        )
+//      ],
+//    );
   }
 
 

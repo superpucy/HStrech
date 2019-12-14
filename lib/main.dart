@@ -4,6 +4,7 @@ import 'package:stretch/demo.dart';
 import 'package:stretch/history.dart';
 import 'package:stretch/package.dart';
 import 'package:stretch/part.dart';
+import 'package:stretch/start.dart';
 import 'dart:io' show Platform;
 
 import 'api.service.dart';
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 //    database = FirebaseDatabase(app: widget.app);
-    pages.add(DemoPage());
+    pages.add(StartPage());
     pages.add(PackagePage());
     pages.add(MyPackagePage());
     pages.add(PartPage());
