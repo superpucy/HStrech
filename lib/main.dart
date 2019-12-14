@@ -4,34 +4,13 @@ import 'package:stretch/demo.dart';
 import 'package:stretch/history.dart';
 import 'package:stretch/package.dart';
 import 'package:stretch/part.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_database/firebase_database.dart';
 import 'dart:io' show Platform;
 
 import 'api.service.dart';
 import 'my_package.dart';
 
 void main() async{
-//  final FirebaseApp app = await FirebaseApp.configure(
-//    name: 'strech-e65bd',
-//    options: Platform.isIOS
-//        ? const FirebaseOptions(
-//      projectID: "strech-e65bd",
-//      googleAppID: '1:667785195359:android:9c84a34fa4cd57701d10ea',
-//      gcmSenderID: '297855924061',
-//      databaseURL: 'https://flutterfire-cd2f7.firebaseio.com',
-//    )
-//        : const FirebaseOptions(
-//      projectID: "strech-e65bd",
-//      googleAppID: '1:667785195359:android:9c84a34fa4cd57701d10ea',
-//      apiKey: 'AIzaSyDZj4667kxyEwkKfFqmhkrd4Wn6MV5siso',
-//      databaseURL: 'https://strech-e65bd.firebaseio.com',
-//    ),
-//  );
-//  final FirebaseStorage storage = FirebaseStorage(
-//      app:app,
-//      storageBucket: 'gs://strech-e65bd.appspot.com');
-//  apiService = ApiService(storage: storage);
+
   runApp(MyHomePage());
 }
 
