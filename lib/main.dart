@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //    _init();
     return MaterialApp(
       title: 'Flutter Demo',
-
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: TextTheme(
           title: TextStyle(

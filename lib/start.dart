@@ -12,7 +12,9 @@ class _StartPageState extends State<StartPage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          getStart(),
+          Center(
+            child: getStart(),
+          ),
         ],
       ),
     );
@@ -26,39 +28,47 @@ class _StartPageState extends State<StartPage> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'Type your Name',
+         TextFormField(
+              decoration: const InputDecoration(
+                hintText: '你的名字是？',
+                prefixIcon: Icon(Icons.face),
+              ),
+              validator: (_name) {
+                if (_name.isEmpty) {
+                  return '輸入名字！！！';
+                }
+                return null;
+              },
+              textAlign: TextAlign.center,
+              controller: nameController,
             ),
-            validator: (_name) {
-              if (_name.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-            controller: nameController,
-          ),
+          Image(
+              image: AssetImage('assets/landing.png'),
+              width: double.infinity,
+              fit: BoxFit.fitWidth,
+            ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
-                if (_formKey.currentState.validate()) {
-                  print(nameController.text);
-                  Navigator.push(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: RaisedButton(
+                onPressed: () {
+                  // Validate will return true if the form is valid, or false if
+                  // the form is invalid.
+                  if (_formKey.currentState.validate()) {
+                    print(nameController.text);
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                      builder: (context) => DemoPage(),
-                    ),
-                  );
-                }
-              },
-              child: Text('Start'),
+                        builder: (context) => DemoPage(username: nameController.text),
+                      ),
+                    );
+                  }
+                },
+                child: Text('開始'),
+              ),
             ),
-          ),
+
+
         ],
       ),
     );

@@ -9,6 +9,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sensors/sensors.dart';
 import 'package:signalr_client/signalr_client.dart';
 class DemoPage extends StatefulWidget {
+
+  String username = "";
+  DemoPage({
+    this.username,
+  });
+
   @override
   _DemoPageState createState() => _DemoPageState();
 }
@@ -23,13 +29,13 @@ class _DemoPageState extends State<DemoPage> {
   List<StreamSubscription<dynamic>> _streamSubscriptions =
   <StreamSubscription<dynamic>>[];
 
-
   static String serverUrl = "https://signalrservices.azurewebsites.net/messageHub";
   final hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
 
+
   Future signalr(double x,double y,double z) async {
     print("==============");
-
+    print(widget.username);
 
     hubConnection.on("ReceiveMessage", _handle);
     try {
