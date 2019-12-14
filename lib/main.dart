@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
 //    database = FirebaseDatabase(app: widget.app);
     pages.add(StartPage());
     pages.add(PackagePage());
-    pages.add(MyPackagePage());
+//    pages.add(MyPackagePage());
     pages.add(PartPage());
     pages.add(HistoryPage());
   }
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("Demo")),
             BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("伸展組合")),
-            BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("我的組合")),
+//            BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("我的組合")),
             BottomNavigationBarItem(icon: Icon(Icons.accessibility_new),title: Text("部位")),
             BottomNavigationBarItem(icon: Icon(Icons.history),title: Text("歷程")),
           ],

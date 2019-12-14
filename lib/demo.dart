@@ -34,7 +34,7 @@ class _DemoPageState extends State<DemoPage> {
 
 
   Future signalr(double x,double y,double z) async {
-    hubConnection.on("ReceiveMessage", _handle);
+
     try {
       final result =
       await hubConnection.invoke("SendAllMessage", args: [widget.username, y.toInt().toString()]);
@@ -58,6 +58,7 @@ class _DemoPageState extends State<DemoPage> {
 
   @override
   void initState() {
+    hubConnection.on("ReceiveMessage", _handle);
     hubConnection.start().then((_){
       _streamSubscriptions
           .add(accelerometerEvents.listen((AccelerometerEvent event) {
@@ -102,7 +103,13 @@ class _DemoPageState extends State<DemoPage> {
           children: <Widget>[
             Image.network("https://media.giphy.com/media/kcTpdLpgRC3z8QG8JW/giphy.gif"),
             RaisedButton(
-              onPressed: (){
+              onPressed: () async{
+                try {
+                  final result =
+                      await hubConnection.invoke("RemoveUser", args: [widget.username]);
+                } finally {
+
+                }
                 Navigator.of(context).pop();
               },
               child: Text("結束"),
