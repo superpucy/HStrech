@@ -28,6 +28,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_swiper: any
   cached_network_image: ^1.1.1
+  sensors: any
+  signalr_client: any
 #  webview_flutter: any
 
 dev_dependencies:
