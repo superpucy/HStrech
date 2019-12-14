@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667785195359",
+    "firebase_url": "https://strech-e65bd.firebaseio.com",
+    "project_id": "strech-e65bd",
+    "storage_bucket": "strech-e65bd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667785195359:android:9c84a34fa4cd57701d10ea",
+        "android_client_info": {
+          "package_name": "app.distudio.com.stretch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667785195359-vd47r6l62fmlor06466eauqe3ul4n6sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZj4667kxyEwkKfFqmhkrd4Wn6MV5siso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667785195359-vd47r6l62fmlor06466eauqe3ul4n6sa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
