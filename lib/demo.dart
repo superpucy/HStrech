@@ -101,13 +101,14 @@ class _DemoPageState extends State<DemoPage> {
             textTheme: Theme.of(context).appBarTheme.textTheme),
         body: Column(
           children: <Widget>[
-            Image.network("https://media.giphy.com/media/kcTpdLpgRC3z8QG8JW/giphy.gif"),
+            Image.network("https://media.giphy.com/media/kcTpdLpgRC3z8QG8JW/giphy.gif",fit: BoxFit.cover,),
             RaisedButton(
+              color: const Color(0XFF6EC16E),
               onPressed: () async{
                 await hubConnection.invoke("RemoveUserMessage", args: [widget.username]);
                 Navigator.of(context).pop();
               },
-              child: Text("結束"),
+              child: Text("結束",style: TextStyle(color: Colors.white)),
             )
           ],
         )

@@ -130,7 +130,10 @@ class _HistoryPageState extends State<HistoryPage> {
 
 
           TextField(
-
+            decoration: const InputDecoration(
+              hintText: '設定天數',
+              prefixIcon: Icon(Icons.flag),
+            ),
 
 
             onChanged: (text) {
@@ -208,7 +211,9 @@ class _HistoryPageState extends State<HistoryPage> {
 
           buildText(),
 
-          buildImage(),
+          Expanded(
+            child: buildImage(),
+          ),
 
 
 

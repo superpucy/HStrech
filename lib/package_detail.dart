@@ -158,10 +158,12 @@ class _PackageDetailPageState extends State<PackageDetailPage> {
 
   addLog() async {
     final db = await DBProvider.db.database;
-    var res = await db.rawQuery('SELECT * FROM log');
+
+    DateTime dateTime = DateTime.now();
+    String d = "${dateTime.year}/${dateTime.month}/${dateTime.day}";
+    var res = await db.rawQuery('SELECT * FROM log where date = ?',[d]);
     if(res.isEmpty) {
-      DateTime dateTime = DateTime.now();
-      String d = "${dateTime.year}/${dateTime.month}/${dateTime.day}";
+
       await db.rawInsert(
           "INSERT Into log (date) values(?)", [d]);
     }

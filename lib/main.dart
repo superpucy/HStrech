@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("Demo")),
+            BottomNavigationBarItem(icon: Icon(Icons.directions_run),title: Text("PK")),
             BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("伸展組合")),
 //            BottomNavigationBarItem(icon: Icon(Icons.list),title: Text("我的組合")),
             BottomNavigationBarItem(icon: Icon(Icons.accessibility_new),title: Text("部位")),
