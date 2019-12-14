@@ -48,8 +48,8 @@ class _DemoPageState extends State<DemoPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    hubConnection.off("ServerInvokeMethodNoParametersNoReturnValue",
-        method: _handle);
+//    hubConnection.off("ServerInvokeMethodNoParametersNoReturnValue",
+//        method: _handle);
     super.dispose();
     for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
       subscription.cancel();
@@ -104,12 +104,7 @@ class _DemoPageState extends State<DemoPage> {
             Image.network("https://media.giphy.com/media/kcTpdLpgRC3z8QG8JW/giphy.gif"),
             RaisedButton(
               onPressed: () async{
-                try {
-                  final result =
-                      await hubConnection.invoke("RemoveUser", args: [widget.username]);
-                } finally {
-
-                }
+                await hubConnection.invoke("RemoveUserMessage", args: [widget.username]);
                 Navigator.of(context).pop();
               },
               child: Text("結束"),
