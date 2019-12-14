@@ -34,14 +34,10 @@ class _DemoPageState extends State<DemoPage> {
 
 
   Future signalr(double x,double y,double z) async {
-    print("==============");
-    print(widget.username);
-
     hubConnection.on("ReceiveMessage", _handle);
     try {
       final result =
-      await hubConnection.invoke("SendMessage", args: ["dora", y.toString()]);
-      print(result);
+      await hubConnection.invoke("SendAllMessage", args: [widget.username, y.toInt().toString()]);
     } finally {
 
     }
@@ -96,85 +92,24 @@ class _DemoPageState extends State<DemoPage> {
         ?.map((double v) => v.toStringAsFixed(1))
         ?.toList();
 
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-
-          Padding(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Accelerometer: $accelerometer'),
-              ],
-            ),
-            padding: const EdgeInsets.all(16.0),
-          ),
-          Padding(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('UserAccelerometer: $userAccelerometer'),
-              ],
-            ),
-            padding: const EdgeInsets.all(16.0),
-          ),
-          Padding(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('Gyroscope: $gyroscope'),
-              ],
-            ),
-            padding: const EdgeInsets.all(16.0),
-          ),
-          RaisedButton(
-            onPressed: (){
-              Navigator.of(context).pop();
-            },
-            child: Text("結束"),
-          )
-        ],
-      )
+    
+    return Scaffold(
+        appBar: AppBar(
+            title: Text("快快樂樂"),
+            centerTitle: true,
+            textTheme: Theme.of(context).appBarTheme.textTheme),
+        body: Column(
+          children: <Widget>[
+            Image.network("https://media.giphy.com/media/kcTpdLpgRC3z8QG8JW/giphy.gif"),
+            RaisedButton(
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+              child: Text("結束"),
+            )
+          ],
+        )
     );
-
-//    return Column(
-//      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//      children: <Widget>[
-//
-//        Padding(
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            children: <Widget>[
-//              Text('Accelerometer: $accelerometer'),
-//            ],
-//          ),
-//          padding: const EdgeInsets.all(16.0),
-//        ),
-//        Padding(
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            children: <Widget>[
-//              Text('UserAccelerometer: $userAccelerometer'),
-//            ],
-//          ),
-//          padding: const EdgeInsets.all(16.0),
-//        ),
-//        Padding(
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//            children: <Widget>[
-//              Text('Gyroscope: $gyroscope'),
-//            ],
-//          ),
-//          padding: const EdgeInsets.all(16.0),
-//        ),
-//        RaisedButton(
-//          child: Text("結束"),
-//        )
-//      ],
-//    );
   }
 
 

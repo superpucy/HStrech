@@ -50,6 +50,7 @@ class _StartPageState extends State<StartPage> {
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: RaisedButton(
+                color: const Color(0XFF6EC16E),
                 onPressed: () {
                   // Validate will return true if the form is valid, or false if
                   // the form is invalid.
@@ -63,7 +64,7 @@ class _StartPageState extends State<StartPage> {
                     );
                   }
                 },
-                child: Text('開始'),
+                child: Text('開始',style: TextStyle(color: Colors.white),),
               ),
             ),
 
